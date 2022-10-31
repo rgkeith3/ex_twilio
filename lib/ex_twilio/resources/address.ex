@@ -10,12 +10,13 @@ defmodule ExTwilio.Address do
             friendly_name: nil,
             customer_name: nil,
             street: nil,
+            street_secondary: nil,
             city: nil,
             region: nil,
             postal_code: nil,
             iso_country: nil
 
-  use ExTwilio.Resource, import: [:stream, :all, :create, :find, :update]
+  use ExTwilio.Resource, import: [:stream, :all, :create, :destroy, :find, :update]
 
   def parents, do: [:account]
 end
