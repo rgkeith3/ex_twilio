@@ -64,13 +64,13 @@ defmodule ExTwilio.Api do
       {:error, %{"message" => "No 'To' number is specified"}, 400}
 
   """
-  @spec create(atom, data, list) :: Parser.success() | Parser.error()
-  def create(module, data, options \\ []) do
+  @spec create(atom, data, list, list) :: Parser.success() | Parser.error()
+  def create(module, data, options \\ [], request_opts \\ []) do
     data = format_data(data)
 
     module
     |> Url.build_url(nil, options)
-    |> Api.post!(data, auth_header(options))
+    |> Api.post!(data, auth_header(options), request_opts)
     |> Parser.parse(module)
   end
 
