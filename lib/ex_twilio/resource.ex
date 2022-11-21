@@ -58,8 +58,8 @@ defmodule ExTwilio.Resource do
       end
 
       if :find in import_functions do
-        @spec find(String.t() | nil, list) :: Parser.parsed_list_response()
-        def find(sid, options \\ []), do: Api.find(__MODULE__, sid, options)
+        @spec find(String.t() | nil, list, list) :: Parser.parsed_list_response()
+        def find(sid, options \\ [], request_opts \\ []), do: Api.find(__MODULE__, sid, options, request_opts)
       end
 
       if :create in import_functions do
@@ -68,13 +68,13 @@ defmodule ExTwilio.Resource do
       end
 
       if :update in import_functions do
-        @spec update(String.t(), Api.data(), list) :: Parser.parsed_response()
-        def update(sid, data, options \\ []), do: Api.update(__MODULE__, sid, data, options)
+        @spec update(String.t(), Api.data(), list, list) :: Parser.parsed_response()
+        def update(sid, data, options \\ [], request_opts \\ []), do: Api.update(__MODULE__, sid, data, options, request_opts)
       end
 
       if :destroy in import_functions do
-        @spec destroy(String.t(), list) :: Parser.success_delete() | Parser.error()
-        def destroy(sid, options \\ []), do: Api.destroy(__MODULE__, sid, options)
+        @spec destroy(String.t(), list, list) :: Parser.success_delete() | Parser.error()
+        def destroy(sid, options \\ [], request_opts \\ []), do: Api.destroy(__MODULE__, sid, options, request_opts)
       end
 
       @doc """
