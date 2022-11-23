@@ -92,7 +92,8 @@ defmodule ExTwilio.Api do
   def update(module, sid, data, options, request_opts) when is_binary(sid),
     do: do_update(module, sid, data, options, request_opts)
 
-  def update(module, %{sid: sid}, data, options, request_opts), do: do_update(module, sid, data, options, request_opts)
+  def update(module, %{sid: sid}, data, options, request_opts),
+    do: do_update(module, sid, data, options, request_opts)
 
   defp do_update(module, sid, data, options, request_opts) do
     data = format_data(data)
@@ -117,8 +118,12 @@ defmodule ExTwilio.Api do
   """
   @spec destroy(atom, String.t(), list, list) :: Parser.success_delete() | Parser.error()
   def destroy(module, sid, options \\ [], request_opts \\ [])
-  def destroy(module, sid, options, request_opts) when is_binary(sid), do: do_destroy(module, sid, options, request_opts)
-  def destroy(module, %{sid: sid}, options, request_opts), do: do_destroy(module, sid, options, request_opts)
+
+  def destroy(module, sid, options, request_opts) when is_binary(sid),
+    do: do_destroy(module, sid, options, request_opts)
+
+  def destroy(module, %{sid: sid}, options, request_opts),
+    do: do_destroy(module, sid, options, request_opts)
 
   defp do_destroy(module, sid, options, request_opts) do
     module
