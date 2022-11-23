@@ -1,4 +1,4 @@
-import Config
+use Mix.Config
 
 config :ex_twilio,
   account_sid: {:system, "TWILIO_TEST_ACCOUNT_SID"},
