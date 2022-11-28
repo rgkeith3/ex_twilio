@@ -44,11 +44,11 @@ defmodule ExTwilio.Api do
       {:error, %{"message" => The requested resource couldn't be found..."}, 404}
 
   """
-  @spec find(atom, String.t() | nil, list) :: Parser.success() | Parser.error()
-  def find(module, sid, options \\ []) do
+  @spec find(atom, String.t() | nil, list, list) :: Parser.success() | Parser.error()
+  def find(module, sid, options \\ [], request_opts \\ []) do
     module
     |> Url.build_url(sid, options)
-    |> Api.get!(auth_header(options))
+    |> Api.get!(auth_header(options), request_opts)
     |> Parser.parse(module)
   end
 
@@ -64,13 +64,13 @@ defmodule ExTwilio.Api do
       {:error, %{"message" => "No 'To' number is specified"}, 400}
 
   """
-  @spec create(atom, data, list) :: Parser.success() | Parser.error()
-  def create(module, data, options \\ []) do
+  @spec create(atom, data, list, list) :: Parser.success() | Parser.error()
+  def create(module, data, options \\ [], request_opts \\ []) do
     data = format_data(data)
 
     module
     |> Url.build_url(nil, options)
-    |> Api.post!(data, auth_header(options))
+    |> Api.post!(data, auth_header(options), request_opts)
     |> Parser.parse(module)
   end
 
@@ -86,20 +86,21 @@ defmodule ExTwilio.Api do
       {:error, %{"message" => "The requested resource ... was not found"}, 404}
 
   """
-  @spec update(atom, String.t(), data, list) :: Parser.success() | Parser.error()
-  def update(module, sid, data, options \\ [])
+  @spec update(atom, String.t(), data, list, list) :: Parser.success() | Parser.error()
+  def update(module, sid, data, options \\ [], request_opts \\ [])
 
-  def update(module, sid, data, options) when is_binary(sid),
-    do: do_update(module, sid, data, options)
+  def update(module, sid, data, options, request_opts) when is_binary(sid),
+    do: do_update(module, sid, data, options, request_opts)
 
-  def update(module, %{sid: sid}, data, options), do: do_update(module, sid, data, options)
+  def update(module, %{sid: sid}, data, options, request_opts),
+    do: do_update(module, sid, data, options, request_opts)
 
-  defp do_update(module, sid, data, options) do
+  defp do_update(module, sid, data, options, request_opts) do
     data = format_data(data)
 
     module
     |> Url.build_url(sid, options)
-    |> Api.post!(data, auth_header(options))
+    |> Api.post!(data, auth_header(options), request_opts)
     |> Parser.parse(module)
   end
 
@@ -115,15 +116,19 @@ defmodule ExTwilio.Api do
       {:error, %{"message" => The requested resource ... was not found"}, 404}
 
   """
-  @spec destroy(atom, String.t()) :: Parser.success_delete() | Parser.error()
-  def destroy(module, sid, options \\ [])
-  def destroy(module, sid, options) when is_binary(sid), do: do_destroy(module, sid, options)
-  def destroy(module, %{sid: sid}, options), do: do_destroy(module, sid, options)
+  @spec destroy(atom, String.t(), list, list) :: Parser.success_delete() | Parser.error()
+  def destroy(module, sid, options \\ [], request_opts \\ [])
 
-  defp do_destroy(module, sid, options) do
+  def destroy(module, sid, options, request_opts) when is_binary(sid),
+    do: do_destroy(module, sid, options, request_opts)
+
+  def destroy(module, %{sid: sid}, options, request_opts),
+    do: do_destroy(module, sid, options, request_opts)
+
+  defp do_destroy(module, sid, options, request_opts) do
     module
     |> Url.build_url(sid, options)
-    |> Api.delete!(auth_header(options))
+    |> Api.delete!(auth_header(options), request_opts)
     |> Parser.parse(module)
   end
 
