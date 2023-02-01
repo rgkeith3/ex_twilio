@@ -5,6 +5,7 @@ defmodule ExTwilio.Call do
   - [Twilio docs](https://www.twilio.com/docs/voice/api/call-resource)
   """
   defstruct sid: nil,
+            call_token: nil,
             parent_call_sid: nil,
             date_created: nil,
             date_updated: nil,
