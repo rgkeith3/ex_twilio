@@ -68,6 +68,11 @@ defmodule ExTwilio.UrlGenerator do
           url = add_segments(Config.video_url(), module, id, options)
           {url, options}
 
+        ["ExTwilio", "InstalledAddOn" | _] ->
+          options = add_installed_add_on_to_options(module, options)
+          url = add_segments(Config.preview_url(), module, id, options)
+          {url, options}
+
         _ ->
           # Add Account SID segment if not already present
           options = add_account_to_options(module, options)
@@ -163,6 +168,12 @@ defmodule ExTwilio.UrlGenerator do
   defp add_flow_to_options(_module, options) do
     Keyword.put_new(options, :flow, Keyword.get(options, :flow_sid))
   end
+
+  defp add_installed_add_on_to_options(ExTwilio.InstalledAddOn.Extension, options) do
+    Keyword.put_new(options, :installed_add_on, Keyword.get(options, :installed_add_on_sid))
+  end
+
+  defp add_installed_add_on_to_options(_, options), do: options
 
   @spec add_workspace_to_options(atom, list) :: list
   defp add_workspace_to_options(_module, options) do
