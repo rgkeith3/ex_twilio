@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MIX_ENV: test
+      TWILIO_TEST_ACCOUNT_SID: ""
+      TWILIO_TEST_AUTH_TOKEN: "test-auth-token"
 
     strategy:
       fail-fast: false
