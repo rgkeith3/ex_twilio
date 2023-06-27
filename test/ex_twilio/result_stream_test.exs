@@ -1,7 +1,7 @@
 defmodule ExTwilio.ResultStreamTest do
   use ExUnit.Case, async: false
-  alias ExTwilio.ResultStream
   import TestHelper
+  alias ExTwilio.ResultStream
 
   defmodule Resource do
     defstruct sid: nil, name: nil

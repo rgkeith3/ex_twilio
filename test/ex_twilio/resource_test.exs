@@ -1,7 +1,7 @@
 defmodule ExTwilio.ResourceTest do
   use ExUnit.Case
-  alias ExTwilio.Api
   import Mock
+  alias ExTwilio.Api
 
   defmodule TestResource do
     defstruct sid: nil

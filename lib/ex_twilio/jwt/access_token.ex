@@ -4,10 +4,9 @@ defmodule ExTwilio.JWT.AccessToken do
 
   https://www.twilio.com/docs/iam/access-tokens
   """
-
-  alias ExTwilio.JWT.Grant
-  alias ExTwilio.Ext
   use Joken.Config
+  alias ExTwilio.Ext
+  alias ExTwilio.JWT.Grant
 
   @enforce_keys [:account_sid, :api_key, :api_secret, :identity, :grants, :expires_in]
 

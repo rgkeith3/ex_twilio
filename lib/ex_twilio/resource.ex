@@ -26,8 +26,8 @@ defmodule ExTwilio.Resource do
     quote bind_quoted: [import_functions: import_functions] do
       alias ExTwilio.Api
       alias ExTwilio.Parser
-      alias ExTwilio.UrlGenerator, as: Url
       alias ExTwilio.ResultStream
+      alias ExTwilio.UrlGenerator, as: Url
 
       @spec new :: %__MODULE__{}
       def new, do: %__MODULE__{}
@@ -59,22 +59,26 @@ defmodule ExTwilio.Resource do
 
       if :find in import_functions do
         @spec find(String.t() | nil, list, list) :: Parser.parsed_list_response()
-        def find(sid, options \\ [], request_opts \\ []), do: Api.find(__MODULE__, sid, options, request_opts)
+        def find(sid, options \\ [], request_opts \\ []),
+          do: Api.find(__MODULE__, sid, options, request_opts)
       end
 
       if :create in import_functions do
         @spec create(Api.data(), list, list) :: Parser.parsed_response()
-        def create(data, options \\ [], request_opts \\ []), do: Api.create(__MODULE__, data, options, request_opts)
+        def create(data, options \\ [], request_opts \\ []),
+          do: Api.create(__MODULE__, data, options, request_opts)
       end
 
       if :update in import_functions do
         @spec update(String.t(), Api.data(), list, list) :: Parser.parsed_response()
-        def update(sid, data, options \\ [], request_opts \\ []), do: Api.update(__MODULE__, sid, data, options, request_opts)
+        def update(sid, data, options \\ [], request_opts \\ []),
+          do: Api.update(__MODULE__, sid, data, options, request_opts)
       end
 
       if :destroy in import_functions do
         @spec destroy(String.t(), list, list) :: Parser.success_delete() | Parser.error()
-        def destroy(sid, options \\ [], request_opts \\ []), do: Api.destroy(__MODULE__, sid, options, request_opts)
+        def destroy(sid, options \\ [], request_opts \\ []),
+          do: Api.destroy(__MODULE__, sid, options, request_opts)
       end
 
       @doc """

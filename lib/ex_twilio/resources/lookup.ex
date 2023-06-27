@@ -4,7 +4,8 @@ defmodule ExTwilio.Lookup do
 
   - [Twilio docs](https://www.twilio.com/docs/lookup/api)
   """
-  alias ExTwilio.{Parser, Config}
+  alias ExTwilio.Config
+  alias ExTwilio.Parser
   alias ExTwilio.UrlGenerator, as: Url
 
   @base_url "https://lookups.twilio.com/v1/PhoneNumbers/"
