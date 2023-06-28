@@ -1,4 +1,5 @@
 defmodule ExTwilio.InstalledAddOn.Extension do
+  @moduledoc false
   defstruct [
     :sid,
     :installed_add_on_sid,

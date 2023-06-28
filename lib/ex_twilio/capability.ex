@@ -19,9 +19,8 @@ defmodule ExTwilio.Capability do
       "xxxxx.yyyyy.zzzzz"
 
   """
-
-  alias ExTwilio.Config
   use Joken.Config
+  alias ExTwilio.Config
 
   defstruct incoming_client_names: [],
             outgoing_client_app: nil,

@@ -1,4 +1,5 @@
 defmodule ExTwilio.InstalledAddOn do
+  @moduledoc false
   defstruct [
     :sid,
     :account_sid,

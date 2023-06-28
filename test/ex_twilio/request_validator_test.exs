@@ -1,7 +1,6 @@
 defmodule ExTwilio.RequestValidatorTest do
-  alias ExTwilio.RequestValidator
-
   use ExUnit.Case, async: true
+  alias ExTwilio.RequestValidator
 
   describe "validating a voice request" do
     setup do

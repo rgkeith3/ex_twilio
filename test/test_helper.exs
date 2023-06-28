@@ -2,8 +2,8 @@ ExUnit.start()
 
 defmodule TestHelper do
   use ExUnit.Case, async: false
-  alias ExTwilio.Api
   import Mock
+  alias ExTwilio.Api
 
   def with_fixture(:get!, response, fun),
     do: with_fixture({:get!, fn _url, _headers, _request_opts -> response end}, fun)

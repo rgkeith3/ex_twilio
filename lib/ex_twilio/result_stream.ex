@@ -13,9 +13,9 @@ defmodule ExTwilio.ResultStream do
   """
 
   alias ExTwilio.Api
+  alias ExTwilio.Config
   alias ExTwilio.Parser
   alias ExTwilio.UrlGenerator
-  alias ExTwilio.Config
 
   @type url :: String.t()
 

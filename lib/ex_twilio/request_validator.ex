@@ -4,10 +4,8 @@ defmodule ExTwilio.RequestValidator do
 
   - [Twilio docs](https://www.twilio.com/docs/usage/security)
   """
-
+  import Bitwise
   alias ExTwilio.Config
-
-  use Bitwise
 
   def valid?(url, params, signature) do
     valid?(url, params, signature, Config.auth_token())
@@ -28,8 +26,7 @@ defmodule ExTwilio.RequestValidator do
     params
     |> Map.keys()
     |> Enum.sort()
-    |> Enum.map(fn key -> key <> Map.get(params, key) end)
-    |> Enum.join()
+    |> Enum.map_join(fn key -> key <> Map.get(params, key) end)
   end
 
   defp compute_hmac(data, key), do: hmac(:sha, key, data)

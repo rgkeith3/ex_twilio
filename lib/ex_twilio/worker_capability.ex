@@ -16,9 +16,8 @@ defmodule ExTwilio.WorkerCapability do
       "xxxxx.yyyyy.zzzzz"
 
   """
-
-  alias ExTwilio.Config
   use Joken.Config
+  alias ExTwilio.Config
 
   defstruct account_sid: nil,
             auth_token: nil,
