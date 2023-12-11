@@ -55,6 +55,10 @@ defmodule ExTwilio.UrlGenerator do
           url = add_segments(Config.notify_url(), module, id, options)
           {url, options}
 
+        ["ExTwilio", "Events" | _] ->
+          url = add_segments(Config.events_url(), module, id, options)
+          {url, options}
+
         ["ExTwilio", "Fax" | _] ->
           url = add_segments(Config.fax_url(), module, id, options)
           {url, options}
@@ -66,6 +70,10 @@ defmodule ExTwilio.UrlGenerator do
 
         ["ExTwilio", "Video" | _] ->
           url = add_segments(Config.video_url(), module, id, options)
+          {url, options}
+
+        ["ExTwilio", "Insights", "Voice" | _] ->
+          url = add_segments(Config.voice_insights_url(), module, id, options)
           {url, options}
 
         ["ExTwilio", "InstalledAddOn" | _] ->

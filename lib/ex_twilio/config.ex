@@ -55,6 +55,8 @@ defmodule ExTwilio.Config do
   """
   def base_url, do: "#{protocol()}://#{api_domain()}/#{api_version()}"
 
+  def events_url, do: "https://events.twilio.com/v1"
+
   def fax_url, do: "https://fax.twilio.com/v1"
 
   def task_router_url, do: "https://taskrouter.twilio.com/v1"
@@ -68,6 +70,8 @@ defmodule ExTwilio.Config do
   def studio_url, do: "https://studio.twilio.com/v1"
 
   def video_url, do: "https://video.twilio.com/v1"
+
+  def voice_insights_url, do: "https://insights.twilio.com/v1/Voice"
 
   def preview_url, do: "https://preview.twilio.com/marketplace"
 
