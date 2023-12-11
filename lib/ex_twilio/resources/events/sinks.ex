@@ -21,4 +21,3 @@ defmodule ExTwilio.Events.Sinks do
 
   use ExTwilio.Resource, import: [:create]
 end
-

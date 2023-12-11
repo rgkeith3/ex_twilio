@@ -20,4 +20,3 @@ defmodule ExTwilio.Events.Subscriptions do
 
   use ExTwilio.Resource, import: [:create]
 end
-
