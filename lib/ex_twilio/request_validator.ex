@@ -13,8 +13,11 @@ defmodule ExTwilio.RequestValidator do
 
   def valid?(url, params, signature, auth_token) do
     url
+    |> IO.inspect(label: "URL")
     |> data_for(params)
+    |> IO.inspect(label: "URL W PARAMS")
     |> compute_hmac(auth_token)
+    |> IO.inspect(label: "HMAC")
     |> Base.encode64()
     |> String.trim()
     |> secure_compare(signature)
@@ -27,6 +30,7 @@ defmodule ExTwilio.RequestValidator do
     |> Map.keys()
     |> Enum.sort()
     |> Enum.map_join(fn key -> key <> Map.get(params, key) end)
+    |> IO.inspect(label: "COMBINED PARAMS")
   end
 
   defp compute_hmac(data, key), do: hmac(:sha, key, data)
@@ -44,9 +48,13 @@ defmodule ExTwilio.RequestValidator do
   # Compares the two binaries in constant-time to avoid timing attacks.
   # See: http://codahale.com/a-lesson-in-timing-attacks/
   defp secure_compare(left, right) do
+    IO.inspect(left, label: "TRIMMED ENCODED STRING")
+    IO.inspect(right, label: "SIGNATURE")
+
     if byte_size(left) == byte_size(right) do
-      secure_compare(left, right, 0) == 0
+      secure_compare(left, right, 0) == 0 |> IO.inspect(label: "SECURE COMPARE RESULT")
     else
+      IO.inspect("BYTE SIZE NOT THE SAME")
       false
     end
   end
