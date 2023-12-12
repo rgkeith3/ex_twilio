@@ -31,7 +31,7 @@ defmodule ExTwilio.RequestValidator do
 
   defp compute_hmac(data, key), do: hmac(:sha, key, data)
 
-  # TODO: remove when we require OTP 22
+  # remove when we require OTP 22
   if System.otp_release() >= "22" do
     defp hmac(digest, key, data), do: :crypto.mac(:hmac, digest, key, data)
   else
