@@ -41,52 +41,8 @@ defmodule ExTwilio.UrlGenerator do
   @spec build_url(atom, String.t() | nil, list) :: String.t()
   def build_url(module, id \\ nil, options \\ []) do
     {url, options} =
-      case Module.split(module) do
-        ["ExTwilio", "TaskRouter" | _] ->
-          options = add_workspace_to_options(module, options)
-          url = add_segments(Config.task_router_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "ProgrammableChat" | _] ->
-          url = add_segments(Config.programmable_chat_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "Notify" | _] ->
-          url = add_segments(Config.notify_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "Events" | _] ->
-          url = add_segments(Config.events_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "Fax" | _] ->
-          url = add_segments(Config.fax_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "Studio" | _] ->
-          options = add_flow_to_options(module, options)
-          url = add_segments(Config.studio_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "Video" | _] ->
-          url = add_segments(Config.video_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "Insights", "Voice" | _] ->
-          url = add_segments(Config.voice_insights_url(), module, id, options)
-          {url, options}
-
-        ["ExTwilio", "InstalledAddOn" | _] ->
-          options = add_installed_add_on_to_options(module, options)
-          url = add_segments(Config.preview_url(), module, id, options)
-          {url, options}
-
-        _ ->
-          # Add Account SID segment if not already present
-          options = add_account_to_options(module, options)
-          url = add_segments(Config.base_url(), module, id, options) <> ".json"
-          {url, options}
-      end
+      Module.split(module)
+      |> construct_url(module, id, options)
 
     # Append querystring
     if Keyword.has_key?(options, :query) do
@@ -94,6 +50,61 @@ defmodule ExTwilio.UrlGenerator do
     else
       url <> build_query(module, options)
     end
+  end
+
+  defp construct_url(["ExTwilio", "TaskRouter" | _], module, id, options) do
+    options = add_workspace_to_options(module, options)
+    url = add_segments(Config.task_router_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "ProgrammableChat" | _], module, id, options) do
+    url = add_segments(Config.programmable_chat_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "Notify" | _], module, id, options) do
+    url = add_segments(Config.notify_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "Events" | _], module, id, options) do
+    url = add_segments(Config.events_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "Fax" | _], module, id, options) do
+    url = add_segments(Config.fax_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "Studio" | _], module, id, options) do
+    options = add_flow_to_options(module, options)
+    url = add_segments(Config.studio_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "Video" | _], module, id, options) do
+    url = add_segments(Config.video_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "Insights", "Voice" | _], module, id, options) do
+    url = add_segments(Config.voice_insights_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(["ExTwilio", "InstalledAddOn" | _], module, id, options) do
+    options = add_installed_add_on_to_options(module, options)
+    url = add_segments(Config.preview_url(), module, id, options)
+    {url, options}
+  end
+
+  defp construct_url(_, module, id, options) do
+    # Add Account SID segment if not already present
+    options = add_account_to_options(module, options)
+    url = add_segments(Config.base_url(), module, id, options) <> ".json"
+    {url, options}
   end
 
   defp add_segments(url, module, id, options) do
