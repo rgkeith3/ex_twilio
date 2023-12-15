@@ -71,7 +71,7 @@ defmodule ExTwilio.Config do
 
   def video_url, do: "https://video.twilio.com/v1"
 
-  def voice_insights_url, do: "https://insights.twilio.com/v1/Voice"
+  def voice_insights_url, do: "https://insights.twilio.com/v1"
 
   def preview_url, do: "https://preview.twilio.com/marketplace"
 
