@@ -89,7 +89,7 @@ defmodule ExTwilio.UrlGenerator do
     {url, options}
   end
 
-  defp construct_url(["ExTwilio", "Insights", "Voice" | _], module, id, options) do
+  defp construct_url(["ExTwilio", "Insights" | _], module, id, options) do
     url = add_segments(Config.voice_insights_url(), module, id, options)
     {url, options}
   end

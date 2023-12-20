@@ -1,4 +1,4 @@
-defmodule ExTwilio.Insights.Voice.Settings do
+defmodule ExTwilio.Insights.Settings do
   @moduledoc """
   Represents Voice Insights Settings Resource.
 
@@ -14,4 +14,6 @@ defmodule ExTwilio.Insights.Voice.Settings do
   ]
 
   use ExTwilio.Resource, import: [:find, :create]
+
+  def resource_name, do: "Voice/Settings"
 end
