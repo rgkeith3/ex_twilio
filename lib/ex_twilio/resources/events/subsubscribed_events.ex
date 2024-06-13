@@ -2,6 +2,7 @@ defmodule ExTwilio.Events.SubscribedEvents do
   @moduledoc """
   Represents Event Streams Subscription Events resource.
 
+  - [Twilio docs](https://www.twilio.com/docs/events/event-streams/subscription/subscribed-event-api)
   """
 
   defstruct [
