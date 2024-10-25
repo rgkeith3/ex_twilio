@@ -22,7 +22,7 @@ defmodule ExTwilio.SipCredentialListMapping do
       :destroy
     ]
 
-  def resource_name, do: "SIP/CredentialListMappings"
+  def resource_name, do: "CredentialListMappings"
   def resource_collection_name, do: "credential_list_mappings"
   def parents, do: [:account, :sip_domain]
 end
