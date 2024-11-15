@@ -89,6 +89,7 @@ defmodule ExTwilio.Parser do
   end
 
   defp list_to_structs(list, module) do
+    IO.inspect(list, label: "LIST TO STRUCTS")
     Enum.map(list, fn item ->
       struct(module, Map.new(item, fn {key, value} -> {String.to_atom(key), value} end))
     end)
