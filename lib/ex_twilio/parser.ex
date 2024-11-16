@@ -83,7 +83,9 @@ defmodule ExTwilio.Parser do
   @spec parse_list(HTTPoison.Response.t(), module, key) :: success_list | error
   def parse_list(response, module, key) do
     case handle_errors(response, fn body -> Jason.decode!(body) end) do
-      {:ok, json} -> {:ok, list_to_structs(json[key], module), Map.drop(json, [key])}
+      {:ok, json} ->
+        IO.inspect(json, label: "JSON rESPONSe")
+        {:ok, list_to_structs(json[key], module), Map.drop(json, [key])}
       error -> error
     end
   end
