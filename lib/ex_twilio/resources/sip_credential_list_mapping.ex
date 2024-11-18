@@ -23,6 +23,6 @@ defmodule ExTwilio.SipCredentialListMapping do
     ]
 
   def resource_name, do: "Auth/Calls/CredentialListMappings"
-  def resource_collection_name, do: "content"
+  def resource_collection_name, do: "contents"
   def parents, do: [:account, :sip_domain]
 end
