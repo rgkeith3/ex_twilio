@@ -82,17 +82,14 @@ defmodule ExTwilio.Parser do
   """
   @spec parse_list(HTTPoison.Response.t(), module, key) :: success_list | error
   def parse_list(response, module, key) do
-    IO.inspect(key, label: "KEY")
     case handle_errors(response, fn body -> Jason.decode!(body) end) do
       {:ok, json} ->
-        IO.inspect(json, label: "JSON rESPONSe")
         {:ok, list_to_structs(json[key], module), Map.drop(json, [key])}
       error -> error
     end
   end
 
   defp list_to_structs(list, module) do
-    IO.inspect(list, label: "LIST TO STRUCTS")
     Enum.map(list, fn item ->
       struct(module, Map.new(item, fn {key, value} -> {String.to_atom(key), value} end))
     end)
